@@ -69,35 +69,35 @@ def queze(message):
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
-            bot.send_message(message.chat.id, 'Нет зависимости', reply_markup=Kb)
+            bot.send_message(message.chat.id, f'Результат: \nНет зависимости. Вы спокойно обходитесь без игр.', reply_markup=Kb)
 
         elif redko > nikogda and redko >= chasto and redko > postouano:
             p = 0
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bin1 = types.KeyboardButton(text='/start', reply_markup=Kb)
+            bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
-            bot.send_message(message.chat.id, 'Адаптпция')
+            bot.send_message(message.chat.id, f'Результат: \nАдаптация. У Вас проявляется увлечение игрой.', reply_markup=Kb)
 
         elif chasto > redko and chasto > nikogda and chasto >= postouano:
             p = 0
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
-            bot.send_message(message.chat.id, 'Активизация', reply_markup=Kb)
+            bot.send_message(message.chat.id, f'Результат: \nАктивизация. Вы начинаете подолгу сидеть в игре, перестаёте контролировать время.', reply_markup=Kb)
 
         elif postouano > redko and postouano > chasto and postouano > nikogda:
             p = 0
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
-            bot.send_message(message.chat.id, 'Стабилизация', reply_markup=Kb)
+            bot.send_message(message.chat.id, f'Результат: \nСтабилизация. Вы уже не можете обходиться без игры, всегда стремитесь туда попасть, игнорируете другие дела и занятия.', reply_markup=Kb)
 
         elif postouano == redko and postouano == chasto and postouano == nikogda:
             p = 0
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
-            bot.send_message(message.chat.id, 'Активизация', reply_markup=Kb)
+            bot.send_message(message.chat.id, f'Результат: \nАктивизация. Вы начинаете подолгу сидеть в игре, перестаёте контролировать время.', reply_markup=Kb)
 
 
 bot.polling()
