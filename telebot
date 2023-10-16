@@ -31,6 +31,7 @@ def start(message):
 
 @bot.message_handler(content_types=['text'])
 def queze(message):
+    global p
 
     def hot():
             global postouano
@@ -64,25 +65,39 @@ def queze(message):
         hot()
     else:
         if nikogda >= redko and nikogda > chasto and nikogda > postouano:
-            bot.send_message(message.chat.id, 'Нет зависимости')
-            bot.send_message(message.chat.id, '/start')
+            p = 0
+            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bin1 = types.KeyboardButton(text='/start')
+            Kb.add(bin1)
+            bot.send_message(message.chat.id, 'Нет зависимости', reply_markup=Kb)
 
         elif redko > nikogda and redko >= chasto and redko > postouano:
+            p = 0
+            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bin1 = types.KeyboardButton(text='/start', reply_markup=Kb)
+            Kb.add(bin1)
             bot.send_message(message.chat.id, 'Адаптпция')
-            bot.send_message(message.chat.id, '/start')
 
         elif chasto > redko and chasto > nikogda and chasto >= postouano:
-            bot.send_message(message.chat.id, 'Активизация')
-            bot.send_message(message.chat.id, '/start')
+            p = 0
+            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bin1 = types.KeyboardButton(text='/start')
+            Kb.add(bin1)
+            bot.send_message(message.chat.id, 'Активизация', reply_markup=Kb)
 
         elif postouano > redko and postouano > chasto and postouano > nikogda:
-            bot.send_message(message.chat.id, 'Стабилизация')
-            bot.send_message(message.chat.id, '/start')
+            p = 0
+            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bin1 = types.KeyboardButton(text='/start')
+            Kb.add(bin1)
+            bot.send_message(message.chat.id, 'Стабилизация', reply_markup=Kb)
 
         elif postouano == redko and postouano == chasto and postouano == nikogda:
-            bot.send_message(message.chat.id, 'Активизация')
-            bot.send_message(message.chat.id, '/start')
-
+            p = 0
+            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bin1 = types.KeyboardButton(text='/start')
+            Kb.add(bin1)
+            bot.send_message(message.chat.id, 'Активизация', reply_markup=Kb)
 
 
 bot.polling()
