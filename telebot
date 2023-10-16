@@ -1,0 +1,88 @@
+import telebot
+from telebot import types
+bot = telebot.TeleBot('6310199773:AAGSVR-x04EKr1TbnHaT7Rn637f7QDQLRXA')
+postouano = 0
+chasto = 0
+redko = 0
+nikogda = 0
+p=0
+list = ['Замечаете, что проводете в игре больше времени, чем намеревались?',
+'Пренебрегаете домашними делами, чтобы подольше поиграть в компьютер?',
+'Предпочитаете проводить время за игрой общению с близкими людьми?',
+'Раздражаетесь из-за того, что окружающие интересуются количеством времени, проводимым вами в игре?',
+'Отмечаете, что перестали делать успехи в учебе или работе, так как слишком много времени проводите в игре?',
+'Занимаете оборонительную позицию и скрытничаете, когда вас спрашивают, чем вы занимаетесь в игре?',
+'Ощущаете, что жизнь без комьпьютерных игр скучна, пуста и безрадостна?',
+'Пренебрегаете сном, засиживаясь в играх допоздна?',
+'Испытываете депрессию, подавленность или нервозность, не играя в компьютерные игры и отмечаете, что это состояние проходит, как только вы оказываетесь в игре?',
+'Бывают ли у Вас боли в спине чаще 1-го раза в неделю?',
+'Бывает ли у Вас ощущение сухости в глазах?',
+'Появились ли у Вас нарушения сна и/или изменился ли режим сна с тех пор, как Вы стали использовать компьютер ежедневно?']
+
+@bot.message_handler(commands=['start'])
+def start(message):
+    bot.send_message(message.chat.id, 'Привет')
+    bot.send_message(message.chat.id, 'Вас приветствует новый телебот')
+    Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    bin1 = types.KeyboardButton(text= 'Да')
+    bin2 = types.KeyboardButton(text='Hет')
+    Kb.add(bin1, bin2)
+    bot.send_message(message.chat.id, 'Не хотите ли пройти тест на эмоциональную зависимость от компьютерных игр?', reply_markup=Kb)
+
+@bot.message_handler(content_types=['text'])
+def queze(message):
+
+    def hot():
+            global postouano
+            global chasto
+            global redko
+            global nikogda
+            global p
+            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            bin1 = types.KeyboardButton(text='Постоянно')
+            bin2 = types.KeyboardButton(text='Часто')
+            bin3 = types.KeyboardButton(text='Редко')
+            bin4 = types.KeyboardButton(text='Никогда')
+            Kb.add(bin4, bin3, bin2, bin1)
+            bot.send_message(message.chat.id, f'{list[p]}', reply_markup=Kb)
+            p += 1
+
+            if message.text == 'Постоянно':
+                postouano += 1
+
+            elif message.text == 'Часто':
+                chasto += 1
+
+            elif message.text == 'Редко':
+                redko += 1
+
+            elif message.text == 'Никогда':
+                nikogda += 1
+
+
+    if p < 12:
+        hot()
+    else:
+        if nikogda >= redko and nikogda > chasto and nikogda > postouano:
+            bot.send_message(message.chat.id, 'Нет зависимости')
+            bot.send_message(message.chat.id, '/start')
+
+        elif redko > nikogda and redko >= chasto and redko > postouano:
+            bot.send_message(message.chat.id, 'Адаптпция')
+            bot.send_message(message.chat.id, '/start')
+
+        elif chasto > redko and chasto > nikogda and chasto >= postouano:
+            bot.send_message(message.chat.id, 'Активизация')
+            bot.send_message(message.chat.id, '/start')
+
+        elif postouano > redko and postouano > chasto and postouano > nikogda:
+            bot.send_message(message.chat.id, 'Стабилизация')
+            bot.send_message(message.chat.id, '/start')
+
+        elif postouano == redko and postouano == chasto and postouano == nikogda:
+            bot.send_message(message.chat.id, 'Активизация')
+            bot.send_message(message.chat.id, '/start')
+
+
+
+bot.polling()
