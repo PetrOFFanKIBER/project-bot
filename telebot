@@ -66,6 +66,10 @@ def queze(message):
     else:
         if nikogda >= redko and nikogda > chasto and nikogda > postouano:
             p = 0
+            postouano = 0
+            chasto = 0
+            redko = 0
+            nikogda = 0
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
@@ -73,6 +77,10 @@ def queze(message):
 
         elif redko > nikogda and redko >= chasto and redko > postouano:
             p = 0
+            postouano = 0
+            chasto = 0
+            redko = 0
+            nikogda = 0
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
@@ -80,6 +88,10 @@ def queze(message):
 
         elif chasto > redko and chasto > nikogda and chasto >= postouano:
             p = 0
+            postouano = 0
+            chasto = 0
+            redko = 0
+            nikogda = 0
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
@@ -87,6 +99,10 @@ def queze(message):
 
         elif postouano > redko and postouano > chasto and postouano > nikogda:
             p = 0
+            postouano = 0
+            chasto = 0
+            redko = 0
+            nikogda = 0
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
@@ -94,6 +110,10 @@ def queze(message):
 
         elif postouano == redko and postouano == chasto and postouano == nikogda:
             p = 0
+            postouano = 0
+            chasto = 0
+            redko = 0
+            nikogda = 0
             Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
             bin1 = types.KeyboardButton(text='/start')
             Kb.add(bin1)
