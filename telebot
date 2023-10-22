@@ -6,7 +6,7 @@ chasto = 0
 redko = 0
 nikogda = 0
 p=0
-list = ['Замечаете, что проводете в игре больше времени, чем намеревались?',
+list = ['Замечаете, что проводите в игре больше времени, чем намеревались?',
 'Пренебрегаете домашними делами, чтобы подольше поиграть в компьютер?',
 'Предпочитаете проводить время за игрой общению с близкими людьми?',
 'Раздражаетесь из-за того, что окружающие интересуются количеством времени, проводимым вами в игре?',
@@ -31,93 +31,97 @@ def start(message):
 
 @bot.message_handler(content_types=['text'])
 def queze(message):
-    global p
+    if message.text == 'Да':
+        global p
 
-    def hot():
-            global postouano
-            global chasto
-            global redko
-            global nikogda
-            global p
-            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bin1 = types.KeyboardButton(text='Постоянно')
-            bin2 = types.KeyboardButton(text='Часто')
-            bin3 = types.KeyboardButton(text='Редко')
-            bin4 = types.KeyboardButton(text='Никогда')
-            Kb.add(bin4, bin3, bin2, bin1)
-            bot.send_message(message.chat.id, f'{list[p]}', reply_markup=Kb)
-            p += 1
+        def hot():
+                global postouano
+                global chasto
+                global redko
+                global nikogda
+                global p
+                Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                bin1 = types.KeyboardButton(text='Постоянно')
+                bin2 = types.KeyboardButton(text='Часто')
+                bin3 = types.KeyboardButton(text='Редко')
+                bin4 = types.KeyboardButton(text='Никогда')
+                Kb.add(bin4, bin3, bin2, bin1)
+                bot.send_message(message.chat.id, f'{list[p]}', reply_markup=Kb)
+                p += 1
 
-            if message.text == 'Постоянно':
-                postouano += 1
+                if message.text == 'Постоянно':
+                    postouano += 1
 
-            elif message.text == 'Часто':
-                chasto += 1
+                elif message.text == 'Часто':
+                    chasto += 1
 
-            elif message.text == 'Редко':
-                redko += 1
+                elif message.text == 'Редко':
+                    redko += 1
 
-            elif message.text == 'Никогда':
-                nikogda += 1
+                elif message.text == 'Никогда':
+                    nikogda += 1
 
 
-    if p < 12:
-        hot()
+        if p < 12:
+            hot()
+        else:
+            if nikogda >= redko and nikogda > chasto and nikogda > postouano:
+                p = 0
+                postouano = 0
+                chasto = 0
+                redko = 0
+                nikogda = 0
+                Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                bin1 = types.KeyboardButton(text='/start')
+                Kb.add(bin1)
+                bot.send_message(message.chat.id, f'Результат: \nНет зависимости. Вы спокойно обходитесь без игр.', reply_markup=Kb)
+
+            elif redko > nikogda and redko >= chasto and redko > postouano:
+                p = 0
+                postouano = 0
+                chasto = 0
+                redko = 0
+                nikogda = 0
+                Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                bin1 = types.KeyboardButton(text='/start')
+                Kb.add(bin1)
+                bot.send_message(message.chat.id, f'Результат: \nАдаптация. У Вас проявляется увлечение игрой.', reply_markup=Kb)
+
+            elif chasto > redko and chasto > nikogda and chasto >= postouano:
+                p = 0
+                postouano = 0
+                chasto = 0
+                redko = 0
+                nikogda = 0
+                Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                bin1 = types.KeyboardButton(text='/start')
+                Kb.add(bin1)
+                bot.send_message(message.chat.id, f'Результат: \nАктивизация. Вы начинаете подолгу сидеть в игре, перестаёте контролировать время.', reply_markup=Kb)
+
+            elif postouano > redko and postouano > chasto and postouano > nikogda:
+                p = 0
+                postouano = 0
+                chasto = 0
+                redko = 0
+                nikogda = 0
+                Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                bin1 = types.KeyboardButton(text='/start')
+                Kb.add(bin1)
+                bot.send_message(message.chat.id, f'Результат: \nСтабилизация. Вы уже не можете обходиться без игры, всегда стремитесь туда попасть, игнорируете другие дела и занятия.', reply_markup=Kb)
+
+            elif postouano == redko and postouano == chasto and postouano == nikogda:
+                p = 0
+                postouano = 0
+                chasto = 0
+                redko = 0
+                nikogda = 0
+                Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+                bin1 = types.KeyboardButton(text='/start')
+                Kb.add(bin1)
+                bot.send_message(message.chat.id, f'Результат: \nАктивизация. Вы начинаете подолгу сидеть в игре, перестаёте контролировать время.', reply_markup=Kb)
     else:
-        if nikogda >= redko and nikogda > chasto and nikogda > postouano:
-            p = 0
-            postouano = 0
-            chasto = 0
-            redko = 0
-            nikogda = 0
-            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bin1 = types.KeyboardButton(text='/start')
-            Kb.add(bin1)
-            bot.send_message(message.chat.id, f'Результат: \nНет зависимости. Вы спокойно обходитесь без игр.', reply_markup=Kb)
-
-        elif redko > nikogda and redko >= chasto and redko > postouano:
-            p = 0
-            postouano = 0
-            chasto = 0
-            redko = 0
-            nikogda = 0
-            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bin1 = types.KeyboardButton(text='/start')
-            Kb.add(bin1)
-            bot.send_message(message.chat.id, f'Результат: \nАдаптация. У Вас проявляется увлечение игрой.', reply_markup=Kb)
-
-        elif chasto > redko and chasto > nikogda and chasto >= postouano:
-            p = 0
-            postouano = 0
-            chasto = 0
-            redko = 0
-            nikogda = 0
-            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bin1 = types.KeyboardButton(text='/start')
-            Kb.add(bin1)
-            bot.send_message(message.chat.id, f'Результат: \nАктивизация. Вы начинаете подолгу сидеть в игре, перестаёте контролировать время.', reply_markup=Kb)
-
-        elif postouano > redko and postouano > chasto and postouano > nikogda:
-            p = 0
-            postouano = 0
-            chasto = 0
-            redko = 0
-            nikogda = 0
-            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bin1 = types.KeyboardButton(text='/start')
-            Kb.add(bin1)
-            bot.send_message(message.chat.id, f'Результат: \nСтабилизация. Вы уже не можете обходиться без игры, всегда стремитесь туда попасть, игнорируете другие дела и занятия.', reply_markup=Kb)
-
-        elif postouano == redko and postouano == chasto and postouano == nikogda:
-            p = 0
-            postouano = 0
-            chasto = 0
-            redko = 0
-            nikogda = 0
-            Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
-            bin1 = types.KeyboardButton(text='/start')
-            Kb.add(bin1)
-            bot.send_message(message.chat.id, f'Результат: \nАктивизация. Вы начинаете подолгу сидеть в игре, перестаёте контролировать время.', reply_markup=Kb)
-
-
+        Kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        bin1 = types.KeyboardButton(text='/start')
+        Kb.add(bin1)
+        bot.send_message(message.chat.id,'Хорошо, если передумаете нажмите "Да"',reply_markup=Kb)
 bot.polling()
